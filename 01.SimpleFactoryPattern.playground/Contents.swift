@@ -28,7 +28,7 @@ class Operation{
     }
 }
 
-class OperationAdd: Operation{
+final class OperationAdd: Operation{
     override func GetResult() -> Double {
         var result: Double = 0
         result = numberA + numberB
@@ -36,7 +36,7 @@ class OperationAdd: Operation{
     }
 }
 
-class OperationSub: Operation{
+final class OperationSub: Operation{
     override func GetResult() -> Double {
         var result: Double = 0
         result = numberA - numberB
@@ -44,7 +44,7 @@ class OperationSub: Operation{
     }
 }
 
-class OperationMul: Operation{
+final class OperationMul: Operation{
     override func GetResult() -> Double {
         var result: Double = 0
         result = numberA * numberB
@@ -52,7 +52,7 @@ class OperationMul: Operation{
     }
 }
 
-class OperationDiv: Operation{
+final class OperationDiv: Operation{
     override func GetResult() -> Double {
         guard numberB != 0 else {
             print("除数不能为 0")
@@ -64,7 +64,7 @@ class OperationDiv: Operation{
     }
 }
 
-class OperationFactory{
+final class OperationFactory{
     class func createOperate(operate: String) -> Operation?{
         var oper: Operation?
         
