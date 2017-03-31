@@ -2,36 +2,34 @@
 
 import UIKit
 
-//现金收费基类
-class CashSuper{
-    func acceptCash(money: Double) -> Double{
-        fatalError("Must Override")
+//现金收费协议
+protocol CashSuper{
+    func acceptCash(money: Double) -> Double
+}
+
+// MARK: 运算类
+//正常收费
+final class CashNormal: CashSuper{
+    func acceptCash(money: Double) -> Double {
         return money
     }
 }
 
-//正常收费子类
-class CashNormal: CashSuper{
-    override func acceptCash(money: Double) -> Double {
-        return money
-    }
-}
-
-//打折收费子类
-class CashRebate: CashSuper{
+//打折收费
+final class CashRebate: CashSuper{
     private var moneyRebate: Double = 1
 
     init(moneyRebate: Double) {
         self.moneyRebate = moneyRebate
     }
     
-    override func acceptCash(money: Double) -> Double {
+    func acceptCash(money: Double) -> Double {
         return money * moneyRebate
     }
 }
 
-//返利收费子类
-class CashReturn: CashSuper{
+//返利收费
+final class CashReturn: CashSuper{
     private var moneyCondition: Double = 0.0
     private var moneyReturn: Double = 0.0
     
@@ -40,7 +38,7 @@ class CashReturn: CashSuper{
         self.moneyReturn = moneyReturn
     }
     
-    override func acceptCash(money: Double) -> Double {
+    func acceptCash(money: Double) -> Double {
         var result = money
         if (money >= moneyCondition) {
             result = money - floor(money / moneyCondition) * moneyReturn
@@ -49,9 +47,9 @@ class CashReturn: CashSuper{
     }
 }
 
-
+// MARK:
 //策略模式结合简单工厂
-class CashContext{
+final class CashContext{
     private var cs: CashSuper?
     
     init(type: String){
